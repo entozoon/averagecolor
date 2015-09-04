@@ -15,8 +15,7 @@ $('.image').parent().css('background-color', averageHex);
 ```
 
 ## Options
-*samples* ```(default: 200) Change the number of pixels it samples to calculate the average.```
-
+**samples** ```(default: 200) Change the number of pixels it samples to calculate the average.```
 e.g.
 ```
 var averageColor = $('.image').averageColor({samples: 50});
