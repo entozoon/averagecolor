@@ -1,5 +1,5 @@
 /*
- *	jQuery AverageColour v1.2
+ *	jQuery AverageColour v1.3
  * Get the average color of an image by looking at a limited sample of pixels.
  *	Returns an object containing r, g, b, and the hex value.
  *
@@ -11,15 +11,20 @@
  *
  */
 
+function rgbToHex(rgb) {
+	return "#" + ((1 << 24) + (rgb.r << 16) + (rgb.g << 8) + rgb.b).toString(16).slice(1);
+}
+
 (function($) {
 
 	$.fn.averageColor = function(options) {
 		var defaults = {
 			samples: 1000, // Look at a limited sample of pixels (change to affect quality/performance)
-			defaultColor: {r: 0, g: 0, b: 0, hex: "#000000"} // defaults to black in case of failure
+			defaultColor: {r: 0, g: 0, b: 0, hex: "#000000"}, // defaults to black in case of failure
 		}
 
 		var options = $.extend(defaults, options);
+
 
 		// Create temporary image
 		var tempImage = new Image();
@@ -101,11 +106,10 @@
 		delete canvas;
 		delete data;
 
+		// reveal the rgbToHex function for external use
+		//rgb.rgbToHex = rgbToHex;
+
 		return rgb; // return rgb no matter what
 	};
-
-	 function rgbToHex(rgb) {
-		return "#" + ((1 << 24) + (rgb.r << 16) + (rgb.g << 8) + rgb.b).toString(16).slice(1);
-	}
 
 })(jQuery);
