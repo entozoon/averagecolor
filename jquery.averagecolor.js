@@ -1,5 +1,5 @@
 /*
- *	jQuery AverageColour v1.3
+ *	jQuery AverageColour v1.4
  * Get the average color of an image by looking at a limited sample of pixels.
  *	Returns an object containing r, g, b, and the hex value.
  *
@@ -25,7 +25,6 @@ function rgbToHex(rgb) {
 
 		var options = $.extend(defaults, options);
 
-
 		// Create temporary image
 		var tempImage = new Image();
 
@@ -37,8 +36,11 @@ function rgbToHex(rgb) {
 		else if ($(this).css('background-image').length) {
 			var backgroundImage = $(this).css('background-image');
 			if (backgroundImage.slice(0,4) === "url(") {
-				tempImage.src = backgroundImage.slice(4, backgroundImage.length-1);
+				backgroundImage = backgroundImage.slice(4, backgroundImage.length-1);
 			}
+			// Strip any " chars, for firefox's sake (sigh)
+			backgroundImage = backgroundImage.replace(/\"/g, '');
+			tempImage.src = backgroundImage;
 		}
 		else {
 			console.log("Averagecolor: couldn't understand the image provided")
