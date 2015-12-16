@@ -15,12 +15,25 @@ $('.image').parent().css('background-color', averageHex);
 ```
 
 ## Options
-- **samples** ```(default: 1000) Change the number of pixels it samples to calculate the average for quality/performance.```
-- **defaultColor** ```(default: black) Change the default background colour if there is a problem with the image.```
-e.g.
+- **samples** ```(integer - default: 1000) Change the number of pixels it samples to calculate the average for quality/performance.```
+- **defaultColor** ```(color - default: black) Change the default background colour if there is a problem with the image.```
+- **colorParent** ```(boolean - default: false) If true, set the background colour of the parent```
+- **fadeEdges** ```(object - enabled by default) Enable / set various properties to do with the faded edges, see below.```
+
+
+### Full example:
 ```
 var averageColor = $('.image').averageColor({
-  samples: 50,
-  defaultColor: {r:255, g:255, b:255}
+	samples: 50,
+	defaultColor: {r:255, g:255, b:255},
+	colorParent: true,
+	fadeEdges: {
+		enabled: true,   // If true, apply an inset box-shadow to give the appearance of faded edges
+		width: 20,       // Fade width can be set, or overridden by CSS
+		edges: [         // You can exclude edges from the fade by overriding this
+			'left',
+			'right'
+		]
+	}
 });
 ```
