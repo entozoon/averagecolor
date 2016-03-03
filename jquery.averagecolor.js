@@ -124,6 +124,9 @@ function rgbToHex(rgb) {
 				// Stick the hex value in there for good measure
 				rgb.hex = rgbToHex(rgb);
 
+				// Add some brightness information too
+				rgb.brightness = getBrightness(rgb);
+
 			} catch (e) {
 				// Security error
 				console.log("averageColor: Security Error");
@@ -186,5 +189,11 @@ function rgbToHex(rgb) {
 
 		return rgb; // return rgb no matter what
 	};
+
+	// The W3C brightness algorithm
+	// https://www.w3.org/TR/AERT#color-contrast
+	function getBrightness(rgb) {
+		return ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000;
+	}
 
 })(jQuery);
